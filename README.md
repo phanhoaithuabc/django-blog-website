@@ -26,6 +26,13 @@ for post in posts_json:
 exit()
 ```
 
+## Set Gmail and password environment to reset password
+
+```bash
+set EMAIL_HOST_USER=phanhoaithuabc@gmail.com
+set EMAIL_HOST_PASSWORD=***
+```
+
 ## Create a migration for the project
 
 ```bash
