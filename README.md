@@ -25,3 +25,27 @@ for post in posts_json:
     post.save()
 exit()
 ```
+
+## Create a migration for the project
+
+```bash
+python manage.py makemigrations
+```
+
+## Migrate database of the project
+
+```bash
+python manage.py migrate
+```
+
+## Create superuser for admin page
+
+```bash
+python manage.py createsuperuser
+```
+
+## Run the project
+
+```bash
+python manage.py runserver
+```
