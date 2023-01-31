@@ -9,7 +9,8 @@ Learning Django Framwork to create a blog website (Bootstrap as a frontend)
 5. Pagination
 6. Email and Password Reset
 7. Deployment (Options)
-8. 
+8. Enable HTTPS with a free SSL/TLS Certificate
+9. 
 
 ## import post into db
 ```bash
@@ -152,7 +153,7 @@ sudo nano django-blog-website.conf
 # WSGIDeamonProcess django-blog python-path=/home/pht/django-blog-website python-home=/home/pht/django-blog-website/venv
 # WSGIProcessGroup django-blog
 ```
-8. Enable Site through Apache and update permissions
+9. Enable Site through Apache and update permissions
 ```bash
 sudo a2ensite django-blog-website 
 sudo a2dissite 000-default.conf
@@ -183,6 +184,32 @@ sudo ufw delete allow 8000
 sudo ufw allow http/tcp
 sudo service apache2 restart
 ```
+
+10. Enable HTTPS with a free SSL/TLS Certificate
+```bash
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-apache
+
+# (Optional)
+sudo nano /etc/apache2/site-available/django-blog-website.conf
+# Edit ServerName www.anydomain.com
+
+sudo ufw allow https
+
+sudo certbot --apache
+
+sudo certbot renew --dry-run
+
+# Get cer update every 90 days
+sudo crontab -e
+# Choose: 1. /bin/nano
+# Add line: 30 4 1 * * sudo certbot renew --quiet 
+```
+
 > [Deploy check list ref](https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/)
 
 ## Some Application Image
