@@ -10,7 +10,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-
+    # Comment this function if you want to use AWS S3 upload file
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
 

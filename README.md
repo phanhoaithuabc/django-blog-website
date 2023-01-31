@@ -10,7 +10,8 @@ Learning Django Framwork to create a blog website (Bootstrap as a frontend)
 6. Email and Password Reset
 7. Deployment (Options)
 8. Enable HTTPS with a free SSL/TLS Certificate
-9. 
+9. Using AWS S3 for File Uploads
+10. 
 
 ## import post into db
 ```bash
@@ -63,7 +64,7 @@ python manage.py collectstatic
 python manage.py runserver
 ```
 
-## Deploy to a Linux(Ubuntu) Server
+## Deploy to a Linux(Ubuntu) Server 
 1. Create a Ubuntu server and connect to the server
 ```bash
 # Edit hostname
@@ -209,6 +210,28 @@ sudo crontab -e
 # Choose: 1. /bin/nano
 # Add line: 30 4 1 * * sudo certbot renew --quiet 
 ```
+
+11. Using AWS S3 for File Uploads
+- Create a bucket on s3 and edit CORS configuration:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+            <AllowedOrigin>*</AllowedOrigin>
+            <AllowedMethod>GET</AllowedMethod>
+            <AllowedMethod>POST</AllowedMethod>
+            <AllowedMethod>PUT</AllowedMethod>
+            <AllowedHeader>*</AllowedHeader>
+        </CORSRule>
+    </CORSConfiguration>
+    ```
+- Create a IAM user and attach AmazonS3FullAccess to it
+- Open ~/.bash_profile and configure:
+    ```bash
+    export AWS_ACCESS_KEY_ID="***"
+    export AWS_SECRET_ACCESS_KEY="***"
+    export AWS_STORAGE_BUCKET_NAME="django-blog-files"
+    ```
 
 > [Deploy check list ref](https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/)
 
